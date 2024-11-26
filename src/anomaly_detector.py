@@ -1,27 +1,31 @@
 import json
-from alert_system import send_alert
-from block_ips import block_ip
-from utils.logger import log_anomaly
+from alert_system import send_alert  # Function to send alerts for suspicious activity
+from block_ips import block_ip  # Function to block suspicious IP addresses
+from utils.logger import log_anomaly  # Function to log detected anomalies
 
-# Load configuration from thresholds.json
+# Load configuration settings from thresholds.json
 with open('configs/thresholds.json') as f:
     config = json.load(f)
 
-THRESHOLD_SIZE = config['threshold_size']
+THRESHOLD_SIZE = config['threshold_size']  # Packet size threshold for anomaly detection
 
 def detect_anomalies(packet):
+    """
+    Detects suspicious network activity based on packet size and other criteria.
+    - packet: Captured network packet.
+    """
     try:
-        # Ensure the packet has an IP layer
+        # Ensure the packet contains an IP layer
         if IP in packet:
-            src = packet[IP].src
-            dst = packet[IP].dst
-            size = len(packet)
+            src = packet[IP].src  # Source IP address
+            dst = packet[IP].dst  # Destination IP address
+            size = len(packet)  # Packet size in bytes
 
-            # Check for anomalies
+            # Check if the packet exceeds the defined size threshold
             if size > THRESHOLD_SIZE:
                 print(f"Anomaly detected: Large packet from {src} -> {dst}, Size: {size}")
                 
-                # Log the detected anomaly
+                # Log the anomaly for record-keeping
                 log_anomaly(src, dst, size)
 
                 # Execute configured response actions
