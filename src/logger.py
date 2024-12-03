@@ -7,12 +7,15 @@ def ensure_log_directory():
     """
     
     log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src", "logs")
-    
+
+    log_file = os.path.join(log_dir, "system.log")
+    log_file = os.path.abspath(log_file)
     # Check if the log directory exists, and create it if not
     if not os.path.exists(log_dir):
         try:
-            os.makedirs(log_dir)
-            print(f"Created log directory: {log_dir}")
+            with open(log_file, "w") as f:
+                pass
+            print(f"Created log file: {log_file}")
         except FileExistsError:
             # The directory was created by another process
             pass
