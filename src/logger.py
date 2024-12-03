@@ -8,6 +8,10 @@ def ensure_log_directory():
     if not os.path.exists('logs'):
         os.makedirs('logs')
 
+ensure_log_directory()
+
+
+
 # Configure logging settings
 logging.basicConfig(
     filename="logs/system.log",
