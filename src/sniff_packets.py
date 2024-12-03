@@ -1,6 +1,6 @@
 from scapy.all import sniff, IP  # Scapy functions for packet sniffing and IP layer handling
 from logger import log_packet  # Function to log captured packets
-
+conf.use_ipv6 = False
 def packet_callback(packet, anomaly_callback):
     """
     Callback function to process each captured packet.
