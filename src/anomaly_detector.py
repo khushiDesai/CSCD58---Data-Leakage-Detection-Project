@@ -15,6 +15,8 @@ with open(CONFIG_PATH) as f:
 
 THRESHOLD_SIZE = config['threshold_size']  # Packet size threshold for anomaly detection
 
+blocked_ips = set()
+
 def detect_anomalies(packet):
     """
     Detects suspicious network activity based on packet size and other criteria.
@@ -27,6 +29,11 @@ def detect_anomalies(packet):
             dst = packet[IP].dst  # Destination IP address
             size = len(packet)  # Packet size in bytes
 
+            # Enforce blocking at the iptables level
+            if src in blocked_ips:
+                print(f"Packet from blocked IP {src} dropped.")
+                return  # Drop packet processing
+                
             # Check if the packet exceeds the defined size threshold
             if size > THRESHOLD_SIZE:
                 print(f"Anomaly detected: Large packet from {src} -> {dst}, Size: {size}")
