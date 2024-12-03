@@ -12,7 +12,7 @@ ensure_log_directory()
 
 # Configure logging settings
 logging.basicConfig(
-    filename="tests/logs/system.log",
+    filename="logs/system.log",
     filemode='w', #overwrite file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
