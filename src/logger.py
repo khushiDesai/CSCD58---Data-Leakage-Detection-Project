@@ -19,6 +19,7 @@ logging.basicConfig(
 )
 
 def log_packet(src, dst, size):
+    print("logging")
     """
     Logs details of a captured packet.
     - src: Source IP address
