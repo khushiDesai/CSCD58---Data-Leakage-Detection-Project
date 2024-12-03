@@ -11,6 +11,33 @@ def generate_unexpected_packets(src_ip, dst_ip):
     - src_ip: Source IP address for the packets.
     - dst_ip: Destination IP address for the packets.
     """
+    print("Generating unexpected packets...")
+
+    try:
+        # 1. Large Packets
+        large_packet = IP(src=src_ip, dst=dst_ip) / Raw(load="X" * 2000)  # Payload > 1500 bytes
+        send(large_packet, count=5)  # Send 5 large packets
+
+        # 2. Malformed Packet
+        malformed_packet = IP(src=src_ip) / Raw(load="Malformed")
+        send(malformed_packet, count=3)  # Send 3 malformed packets
+
+        # 3. Unauthorized Protocol (UDP)
+        unauthorized_packet = IP(src=src_ip, dst=dst_ip) / UDP(dport=1234) / Raw(load="Unexpected UDP")
+        send(unauthorized_packet, count=4)  # Send 4 UDP packets
+
+        # 4. Spoofed Packets
+        spoofed_packet = IP(src="192.168.99.99", dst=dst_ip) / TCP(dport=80) / Raw(load="Spoofed Data")
+        send(spoofed_packet, count=2)  # Send 2 spoofed packets
+
+        print("Unexpected packets sent successfully.")
+    except Exception as e:
+        print(f"Error during packet generation: {e}")
+
+def setup_network():
+    """
+    Set up the Mininet network and test the detection tool.
+    """
     print("DEBUG: Setting up the Mininet network...")
     net = Mininet(controller=Controller, link=TCLink)
 
