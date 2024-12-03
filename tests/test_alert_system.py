@@ -8,7 +8,7 @@ class TestAlertSystem(unittest.TestCase):
         """
         print("Testing email alert...")
         try:
-            send_alert("192.168.1.100")  # Test with a dummy IP
+            send_alert("192.168.1.1")  # Test with a dummy IP
             self.assertTrue(True, "Alert function executed successfully.")
         except Exception as e:
             self.fail(f"Alert function failed with error: {e}")

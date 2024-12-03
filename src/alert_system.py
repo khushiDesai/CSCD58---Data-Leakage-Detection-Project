@@ -26,9 +26,14 @@ def send_alert(ip):
     recipients = config['alert_email']  # List of alert emails
 
     # Compose email
-    subject = f"Alert: Suspicious IP Detected - {ip}"
-    body = f"Anomaly detected originating from IP:\n\n{ip}\n\nPlease investigate this activity."
-    
+    subject = f"Alert: Suspicious IP Detected and Blocked - {ip}"
+    body = (
+        f"Anomaly detected originating from IP:\n\n"
+        f"{ip}\n\n"
+        f"The IP address has been automatically blocked to prevent further activity.\n\n"
+        f"Please investigate this activity and take necessary actions."
+    )
+
     # Build the email
     message = MIMEMultipart()
     message['From'] = sender_email
