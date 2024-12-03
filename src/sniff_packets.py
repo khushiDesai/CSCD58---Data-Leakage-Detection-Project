@@ -7,6 +7,8 @@ def packet_callback(packet, anomaly_callback):
     - Logs the packet details if it contains an IP layer.
     - Skips non-IP packets.
     """
+    print(f"Captured Packet: {packet.summary()}")
+
     try:
         # Check if the packet contains an IP layer
         if IP in packet:
