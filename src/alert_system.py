@@ -19,11 +19,21 @@ def send_alert(ip):
     Sends an email alert to all configured recipients when a suspicious IP is detected.
     - ip: Source IP address flagged as suspicious.
     """
-    print(f"Sending alert for IP: {ip}")
-    sender_email = config['sender_email']
-    smtp_server = config['smtp_server']
-    smtp_port = config['smtp_port']
-    recipients = config['alert_email']  # List of alert emails
+    print(f"DEBUG: Preparing to send alert for IP: {ip}")
+    
+    # Load configuration settings
+    sender_email = config.get('sender_email')
+    smtp_server = config.get('smtp_server')
+    smtp_port = config.get('smtp_port')
+    recipients = config.get('alert_email', [])
+    sender_password = config.get('sender_password')
+
+    # Debugging output
+    print(f"DEBUG: Sender Email: {sender_email}")
+    print(f"DEBUG: SMTP Server: {smtp_server}")
+    print(f"DEBUG: SMTP Port: {smtp_port}")
+    print(f"DEBUG: Recipients: {recipients}")
+    print(f"DEBUG: Sender Password Provided: {'Yes' if sender_password else 'No'}")
 
     # Compose email
     subject = f"Alert: Suspicious IP Detected and Blocked - {ip}"
@@ -34,19 +44,21 @@ def send_alert(ip):
         f"Please investigate this activity and take necessary actions."
     )
 
-    # Build the email
     message = MIMEMultipart()
     message['From'] = sender_email
-    message['To'] = ", ".join(recipients)  # Join multiple emails with commas
+    message['To'] = ", ".join(recipients)
     message['Subject'] = subject
     message.attach(MIMEText(body, 'plain'))
 
     try:
-        # Connect to SMTP server
+        print("DEBUG: Connecting to SMTP server...")
         with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()  # Secure the connection
-            server.login(sender_email, config['sender_password'])  # Authenticate
+            server.set_debuglevel(1)  # Enable detailed SMTP debugging
+            server.starttls()
+            print("DEBUG: Starting TLS...")
+            server.login(sender_email, sender_password)
+            print("DEBUG: Login successful.")
             server.send_message(message)
-        print(f"Alert email sent to {recipients}")
+        print(f"DEBUG: Alert email successfully sent to {recipients}")
     except Exception as e:
-        print(f"Failed to send alert email: {e}")
+        print(f"DEBUG: Failed to send alert email. Error: {e}")
