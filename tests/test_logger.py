@@ -7,7 +7,7 @@ class TestLogging(unittest.TestCase):
         """
         Test logging of packets and anomalies.
         """
-        log_file = "logs/system.log"
+        log_file = "tests/logs/system.log"
         if os.path.exists(log_file):
             os.remove(log_file)  # Clean log file before testing
 

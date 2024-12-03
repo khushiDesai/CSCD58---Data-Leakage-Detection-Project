@@ -1,3 +1,5 @@
+import os
+import sys
 import unittest
 from scapy.all import IP, TCP
 from src.anomaly_detector import detect_anomalies
