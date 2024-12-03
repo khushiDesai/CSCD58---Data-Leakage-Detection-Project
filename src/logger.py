@@ -33,7 +33,7 @@ ensure_log_directory()
 # Configure logging settings
 logging.basicConfig(
     filename="src/logs/system.log",
-    filemode='a', #overwrite file
+    filemode='a', #append file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
@@ -46,7 +46,6 @@ def log_packet(src, dst, size):
     - size: Size of the packet in bytes
     """
     check_file_exit()
-    print(f"Packet: {src} -> {dst}, Size: {size}")
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
 
 def log_anomaly(src, dst, size):
