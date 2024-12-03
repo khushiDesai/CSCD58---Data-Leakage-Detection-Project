@@ -102,9 +102,31 @@ pip3 install scapy
 ---
 
 ## **File Structure**
+```
+CSCD58---Data-Leakage-Detection-Project
+│   README.md 
+│
+└───src
+│   └───configs/
+│   │   │   thresholds.json # Configuration thresholds
+│   │   alert_system.py # Email alert functionality
+│   │   anomaly_dectector.py # Anomaly detection logic
+│   │   block_ips.py    # IP blocking functionality
+│   │   logger.py  # Logging system
+│   │   main.py # Main script to run the tool
+│   │   sinff_packets.py    # Packet sniffing logic
+│   
+└───tests
+│   └───logs/
+│   │   │   system.log # Log file for captured packets and anomalies
+│   │   test_alert_system.py    # Test for alert system
+│   │   test_anomaly_dectector.py   # Test for anomaly dectection
+│   │   test_block_ips.py   # Test for IP blocking
+│   │   test_logger.py  # Test for logging
+│   │   traffic_simulation.py   # Traffic generation script
+│   │   automated_test.py   # Automated testing scripts
 
-
----
+```
 
 ## **Analysis and Discussion**
 - Results
