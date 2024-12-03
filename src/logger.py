@@ -13,16 +13,15 @@ def ensure_log_directory():
     # Check if the log directory exists, and create it if not
     if not os.path.exists(log_dir):
         try:
+            print(f"Created log file: {log_file}")
             with open(log_file, "w") as f:
                 pass
-            print(f"Created log file: {log_file}")
+            
         except FileExistsError:
             # The directory was created by another process
             pass
     else:
         print(f"Log directory already exists: {log_dir}")
-
-ensure_log_directory()
 
 # Configure logging settings
 logging.basicConfig(
@@ -40,6 +39,7 @@ def log_packet(src, dst, size):
     - dst: Destination IP address
     - size: Size of the packet in bytes
     """
+    ensure_log_directory()
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
 
 def log_anomaly(src, dst, size):
@@ -49,4 +49,5 @@ def log_anomaly(src, dst, size):
     - dst: Destination IP address
     - size: Size of the packet in bytes
     """
+    ensure_log_directory()
     logging.warning(f"Anomaly detected: {src} -> {dst}, Size: {size}")
