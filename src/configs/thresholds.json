@@ -1,6 +1,10 @@
 {
     "threshold_size": 1000,
-    "alert_email": "admin@example.com",
+    "alert_email": "vicky20020103@gmail.com",
+    "smtp_server": "localhost",
+    "smtp_port": 25,
+    "sender_email": "alerts@mininet-vm.local",
+    "sender_password": "",
     "response_actions": [
         "block_ip",
         "send_alert"
