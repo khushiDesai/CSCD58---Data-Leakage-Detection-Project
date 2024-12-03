@@ -1,10 +1,14 @@
 import json
+import os
 from alert_system import send_alert  # Function to send alerts for suspicious activity
 from block_ips import block_ip  # Function to block suspicious IP addresses
-from utils.logger import log_anomaly  # Function to log detected anomalies
+from logger import log_anomaly  # Function to log detected anomalies
+
+# Resolve the absolute path to the `configs/thresholds.json` file
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'configs/thresholds.json')
 
 # Load configuration settings from thresholds.json
-with open('configs/thresholds.json') as f:
+with open(CONFIG_PATH) as f:
     config = json.load(f)
 
 THRESHOLD_SIZE = config['threshold_size']  # Packet size threshold for anomaly detection

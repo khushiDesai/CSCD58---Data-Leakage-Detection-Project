@@ -1,7 +1,7 @@
 import threading
 from sniff_packets import start_sniffing  # Captures network packets
 from anomaly_detector import detect_anomalies  # Detects anomalies in captured packets
-from utils.logger import ensure_log_directory  # Ensures logs directory exists
+from logger import ensure_log_directory  # Ensures logs directory exists
 
 def main():
     """
