@@ -3,8 +3,8 @@ import os
 from scapy.all import IP#import IP layer from Scapy
 
 from src.alert_system import send_alert  # Function to send alerts for suspicious activity
-from block_ips import block_ip, get_blocked_ips  # Function to block suspicious IP addresses
-from logger import log_anomaly  # Function to log detected anomalies
+from src.block_ips import block_ip, get_blocked_ips  # Function to block suspicious IP addresses
+from src.logger import log_anomaly  # Function to log detected anomalies
 
 # Resolve the absolute path to the `configs/thresholds.json` file
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'configs/thresholds.json')
