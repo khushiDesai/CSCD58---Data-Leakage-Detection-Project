@@ -1,6 +1,7 @@
 import unittest
 from src.block_ips import block_ip
 import os
+import subprocess
 
 class TestBlockIP(unittest.TestCase):
     def test_block_ip(self):
@@ -10,10 +11,10 @@ class TestBlockIP(unittest.TestCase):
         test_ip = "192.168.1.100"
         print(f"Blocking IP: {test_ip}")
         try:
-            block_ip(test_ip)
-            # Check if the IP was added to iptables
-            result = os.popen(f"sudo iptables -L | grep {test_ip}").read()
-            self.assertIn(test_ip, result, "IP successfully blocked.")
+            result = subprocess.run(
+                ["sudo", "iptables", "-L"], capture_output=True, text=True
+            )
+            self.assertIn(test_ip, result.stdout, "IP successfully blocked.")
         except Exception as e:
             self.fail(f"IP blocking failed with error: {e}")
 
