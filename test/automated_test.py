@@ -3,7 +3,6 @@ from mininet.node import Controller
 from mininet.cli import CLI
 from mininet.link import TCLink
 from scapy.all import IP, UDP, TCP, ICMP, Raw, send
-conf.use_ipv6 = False
 
 def generate_unexpected_packets(src_ip, dst_ip):
     """
@@ -46,11 +45,7 @@ def setup_network():
 
     # Start the network
     net.start()
-
-        # Disable IPv6 on all hosts
-    for host in [h1, h2]:
-        host.cmd('sysctl -w net.ipv6.conf.all.disable_ipv6=1')
-        host.cmd('sysctl -w net.ipv6.conf.default.disable_ipv6=1')
+    
     # Deploy detection tool
     h1.cmd('python3 ../src/main.py &')  # Start tool on h1
 
