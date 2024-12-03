@@ -18,7 +18,7 @@ class TestLogging(unittest.TestCase):
         """
         Test logging of packets and anomalies.
         """
-        log_file = os.path.join(os.path.dirname(__file__), "/logs/system.log")
+        log_file = os.path.join(os.path.dirname(__file__), "logs/system.log")
         log_file = os.path.abspath(log_file)
         ensure_log_file(log_file)
 
