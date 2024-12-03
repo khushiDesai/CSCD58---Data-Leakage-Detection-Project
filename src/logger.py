@@ -33,7 +33,7 @@ ensure_log_directory()
 
 # Configure logging settings
 logging.basicConfig(
-    filename=os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs","system.log"),
+    filename=os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "logs","system.log"),
     filemode='a', #append file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
