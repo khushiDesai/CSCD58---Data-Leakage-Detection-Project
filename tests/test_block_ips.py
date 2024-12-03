@@ -1,5 +1,5 @@
 import unittest
-from block_ips import block_ip
+from src.block_ips import block_ip
 import os
 
 class TestBlockIP(unittest.TestCase):

@@ -1,8 +1,8 @@
 import unittest
 from scapy.all import IP, TCP
-from anomaly_detector import detect_anomalies
-from logger import log_anomaly
-from block_ips import block_ip
+from src.anomaly_detector import detect_anomalies
+from src.logger import log_anomaly
+from src.block_ips import block_ip
 
 class TestIntegration(unittest.TestCase):
     def test_full_workflow(self):

@@ -1,5 +1,5 @@
 import unittest
-from logger import log_packet, log_anomaly
+from src.logger import log_packet, log_anomaly
 import os
 
 class TestLogging(unittest.TestCase):

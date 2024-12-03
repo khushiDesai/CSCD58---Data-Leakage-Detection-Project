@@ -1,5 +1,5 @@
 import unittest
-from anomaly_detector import detect_anomalies
+from src.anomaly_detector import detect_anomalies
 from scapy.all import IP, TCP
 
 class TestAnomalyDetector(unittest.TestCase):
