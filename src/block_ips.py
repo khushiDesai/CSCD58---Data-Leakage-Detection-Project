@@ -43,6 +43,7 @@ def get_blocked_ips():
         # Parse the output to find blocked IPs
         blocked_ips = []
         for line in result.stdout.splitlines():
+            print(line)
             if "DROP" in line:  # Look for DROP rules
                 parts = line.split()
                 if len(parts) >= 7:  # Ensure the line contains enough columns
