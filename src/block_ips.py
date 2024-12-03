@@ -47,7 +47,7 @@ def get_blocked_ips():
             if "DROP" in line:  # Look for DROP rules
                 parts = line.split()
                 if len(parts) >= 7:  # Ensure the line contains enough columns
-                    ip = parts[4]  # IP is in the 4th column
+                    ip = parts[7]  # IP is in the 4th column
                     blocked_ips.append(ip)
         return blocked_ips
 
