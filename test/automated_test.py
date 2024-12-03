@@ -23,7 +23,7 @@ def setup_network():
     h1.cmd('python3 ../src/main.py &')  # Start tool on h1
 
     # Simulate traffic
-    h2.cmd('python3 traffic_simulation.py')
+    traffic_output = h2.cmd('python3 traffic_simulation.py')
     print("Traffic Output:", traffic_output)
 
     # Open CLI for further inspection
