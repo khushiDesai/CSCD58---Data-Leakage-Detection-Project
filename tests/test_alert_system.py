@@ -1,5 +1,5 @@
 import unittest
-from ../alert_system import send_alert
+from src.alert_system import send_alert
 
 class TestAlertSystem(unittest.TestCase):
     def test_send_alert(self):
