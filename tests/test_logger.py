@@ -7,6 +7,7 @@ class TestLogging(unittest.TestCase):
         """
         Test logging of packets and anomalies.
         """
+        print(f"Current working directory: {os.getcwd()}")
         log_file = "tests/logs/system.log"
 
         # Attempt to clean the log file before testing
