@@ -25,6 +25,7 @@ class TestBlockIP(unittest.TestCase):
         test_ip = "192.168.1.100"
         print(f"Blocking IP: {test_ip}")
         try:
+            block_ip(test_ip)
             result = subprocess.run(
                 ["sudo", "iptables", "-L"], capture_output=True, text=True
             )
