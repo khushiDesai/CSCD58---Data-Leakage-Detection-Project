@@ -55,7 +55,7 @@ The **Data Leakage Detection Tool** is a simplified yet practical system designe
   - Scapy
   - Mininet
   - Wireshark (optional)
-  - Postfix (for email alerts)
+  - Postfix (for email alerts): Requires a Gmail account configured with an App Password.
 
 ### **Install dependencies**:
 ```bash
@@ -76,17 +76,28 @@ cd CSCD58---Data-Leakage-Detection-Project
     sudo python3 src/main.py
 ```
 
-3. **Simulate Traffic**: Use the provided traffic_simulation.py script to generate normal and anomalous traffic:
+3. **Configure Email Alerts**:
+   - Update `src/configs/thresholds.json` with recipient emails and Gmail App Password for the sender account.
+   - Example:
+     ```json
+     {
+         "alert_email": ["recipient1@gmail.com", "recipient2@gmail.com"],
+         "sender_email": "data.alerts.tool@gmail.com",
+         "sender_password": "<app_password>"
+     }
+     ```
+
+4. **Simulate Traffic**: Use the provided traffic_simulation.py script to generate normal and anomalous traffic:
 ```bash
     python3 tests/traffic_simulation.py <destination_ip>
 ```
 
-4. **Check Logs**: View logged anomalies:
+5. **Check Logs**: View logged anomalies:
 ```bash
     cat logs/system.log
 ```
 
-5. **Test Components Individually**: Run tests for specific modules:
+6. **Test Components Individually**: Run tests for specific modules:
 ```bash
     python3 -m unittest tests/test_alert_system.py
     python3 -m unittest discover -s tests -p "*.py"
@@ -97,17 +108,18 @@ cd CSCD58---Data-Leakage-Detection-Project
 ## **Implementation Details and Documentation**
 
 ### **Core Features**
-- Packet Sniffing:
+- **Packet Sniffing**:
     - Real-time packet capture using Scapy with IP filtering.
-- Anomaly Detection:
+- **Anomaly Detection**:
     - Detect anomalies based on packet size thresholds and patterns.
-    - Modular configuration using thresholds.json.
-- Logging:
-    - Captures details of each packet and anomaly in logs/system.log.
-- Alert System:
-    - Sends email notifications for detected anomalies using Postfix.
-- Automated Response:
-    - Dynamically blocks suspicious IPs using iptables.
+    - Modular configuration using `thresholds.json`.
+- **Logging**:
+    - Captures details of each packet and anomaly in `logs/system.log`.
+- **Alert System**:
+    - Sends email notifications to multiple recipients for detected anomalies.
+    - Configured to use a dedicated sender email (`data.alerts.tool@gmail.com`) with Gmail's secure App Password for authentication.
+- **Automated Response**:
+    - Dynamically blocks suspicious IPs using `iptables`.
 
 ---
 
@@ -139,14 +151,14 @@ CSCD58---Data-Leakage-Detection-Project
 ```
 
 ## **Analysis and Discussion**
-- Results
+- **Results**
     - Successfully detected anomalies based on predefined thresholds.
     - IP blocking and alerting mechanisms worked as intended, mitigating potential risks.
     - Simulated scenarios in Mininet demonstrated realistic behaviors, validating the tool’s utility.
-- Performance Metrics
+- **Performance Metrics**
     - Accuracy: Low false positives/negatives under tested scenarios.
     - Efficiency: Real-time detection with minimal latency.
-- Challenges
+- **Challenges**
     - Ensuring compatibility across different network environments.
     - Managing the balance between detection sensitivity and false positives.
 
@@ -156,11 +168,11 @@ CSCD58---Data-Leakage-Detection-Project
 The Data Leakage Detection Tool achieved its goal of providing a simplified yet effective network monitoring solution. While basic in its design, the tool lays the foundation for more advanced implementations incorporating machine learning and dynamic threat modeling.
 
 ### **Lessons Learned**
-1. Importance of Modular Design:
+1. **Importance of Modular Design**:
     - Breaking the project into clear, testable components simplifies debugging and collaboration.
-2. Real-World Challenges:
+2. **Real-World Challenges**:
     - Network environments can vary greatly, emphasizing the need for adaptable configurations.
-3. Teamwork:
+3. **Teamwork**:
     - Collaboration and division of tasks significantly enhanced project efficiency.
 
 Future work could focus on incorporating machine learning for adaptive anomaly detection and improving scalability for larger networks.
