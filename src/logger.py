@@ -28,11 +28,12 @@ def check_file_exit():
                 pass
         except Exception as e:
             raise RuntimeError(f"Error ensuring log file '{log_file}': {e}")
+
 ensure_log_directory()
 
 # Configure logging settings
 logging.basicConfig(
-    filename=os.path.join(os.path.dirname(os.path.dirname(__file__)),"src","logs","system.log"),
+    filename="logs/system.log",
     filemode='a', #append file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
