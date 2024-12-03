@@ -66,21 +66,31 @@ pip3 install scapy
 
 ### **Steps to Run**:
 1. **Clone the Repository**:
-    git clone https://github.com/khushiDesai/CSCD58---Data-Leakage-Detection-Project.git
-    cd CSCD58---Data-Leakage-Detection-Project
+```bash
+git clone https://github.com/khushiDesai/CSCD58---Data-Leakage-Detection-Project.git
+cd CSCD58---Data-Leakage-Detection-Project
+```
 
 2. **Start the Tool**: Launch the tool on a Mininet host:
+```bash
     sudo python3 src/main.py
+```
 
 3. **Simulate Traffic**: Use the provided traffic_simulation.py script to generate normal and anomalous traffic:
+```bash
     python3 tests/traffic_simulation.py <destination_ip>
+```
 
 4. **Check Logs**: View logged anomalies:
+```bash
     cat logs/system.log
+```
 
 5. **Test Components Individually**: Run tests for specific modules:
+```bash
     python3 -m unittest tests/test_alert_system.py
     python3 -m unittest discover -s tests -p "*.py"
+```
 
 ---
 
@@ -108,23 +118,23 @@ CSCD58---Data-Leakage-Detection-Project
 │
 └───src
 │   └───configs/
-│   │   │   thresholds.json # Configuration thresholds
-│   │   alert_system.py # Email alert functionality
-│   │   anomaly_dectector.py # Anomaly detection logic
-│   │   block_ips.py    # IP blocking functionality
-│   │   logger.py  # Logging system
-│   │   main.py # Main script to run the tool
-│   │   sinff_packets.py    # Packet sniffing logic
+│   │   │   thresholds.json         # Configuration thresholds
+│   │   alert_system.py             # Email alert functionality
+│   │   anomaly_dectector.py        # Anomaly detection logic
+│   │   block_ips.py                # IP blocking functionality
+│   │   logger.py                   # Logging system
+│   │   main.py                     # Main script to run the tool
+│   │   sinff_packets.py            # Packet sniffing logic
 │   
 └───tests
 │   └───logs/
-│   │   │   system.log # Log file for captured packets and anomalies
-│   │   test_alert_system.py    # Test for alert system
+│   │   │   system.log              # Log file for captured packets and anomalies
+│   │   test_alert_system.py        # Test for alert system
 │   │   test_anomaly_dectector.py   # Test for anomaly dectection
-│   │   test_block_ips.py   # Test for IP blocking
-│   │   test_logger.py  # Test for logging
-│   │   traffic_simulation.py   # Traffic generation script
-│   │   automated_test.py   # Automated testing scripts
+│   │   test_block_ips.py           # Test for IP blocking
+│   │   test_logger.py              # Test for logging
+│   │   traffic_simulation.py       # Traffic generation script
+│   │   automated_test.py           # Automated testing scripts
 
 ```
 
