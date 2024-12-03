@@ -20,3 +20,36 @@ def block_ip(ip):
             print(f"Failed to block IP {ip}: {result.stderr}")
     except Exception as e:
         print(f"Error blocking IP {ip}: {e}")
+
+def get_blocked_ips():
+    """
+    Retrieves all IPs currently blocked by iptables.
+    Returns:
+        A list of blocked IP addresses.
+    """
+    try:
+        # Run the iptables command to list rules
+        result = subprocess.run(
+            ["sudo", "iptables", "-L", "INPUT", "-v", "-n"],
+            capture_output=True,
+            text=True
+        )
+
+        # Check for errors
+        if result.returncode != 0:
+            print(f"Failed to retrieve iptables rules: {result.stderr}")
+            return []
+
+        # Parse the output to find blocked IPs
+        blocked_ips = []
+        for line in result.stdout.splitlines():
+            if "DROP" in line:  # Look for DROP rules
+                parts = line.split()
+                if len(parts) > 4:  # Ensure the line contains enough columns
+                    blocked_ips.append(parts[4])  # IP is typically in the 5th column
+
+        return blocked_ips
+
+    except Exception as e:
+        print(f"Error retrieving blocked IPs: {e}")
+        return []
