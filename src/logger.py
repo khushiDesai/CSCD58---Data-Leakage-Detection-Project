@@ -33,7 +33,7 @@ ensure_log_directory()
 
 # Configure logging settings
 logging.basicConfig(
-    filename="logs/system.log",
+    filename="src/logs/system.log",
     filemode='a', #append file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
@@ -58,6 +58,3 @@ def log_anomaly(src, dst, size):
     """
     check_file_exit()
     logging.warning(f"Anomaly detected: {src} -> {dst}, Size: {size}")
-
-if __name__ == '__main__':
-    log_packet("192.168.1.100", "10.0.0.1", 1500)
