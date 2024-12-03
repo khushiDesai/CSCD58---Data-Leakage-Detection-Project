@@ -2,13 +2,28 @@ import unittest
 import os
 from src.logger import log_packet, log_anomaly
 
+def ensure_log_file(log_file):
+    """
+    Ensures the log directory and file exist.
+    """
+    log_dir = os.path.dirname(log_file)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    if not os.path.exists(log_file):
+        with open(log_file, "w") as f:
+            pass
+
 class TestLogging(unittest.TestCase):
     def test_logging(self):
         """
         Test logging of packets and anomalies.
         """
+        log_file = os.path.join(os.path.dirname(__file__), "../logs/system.log")
+        log_file = os.path.abspath(log_file)
+        ensure_log_file(log_file)
+
         print(f"Current working directory: {os.getcwd()}")
-        log_file = "tests/logs/system.log"
+        print(f"Resolved log file path: {log_file}")
 
         # Attempt to clean the log file before testing
         if os.path.exists(log_file):
