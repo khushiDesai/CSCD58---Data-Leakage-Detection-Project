@@ -1,6 +1,6 @@
 import unittest
-from src.logger import log_packet, log_anomaly
 import os
+from src.logger import log_packet, log_anomaly
 
 class TestLogging(unittest.TestCase):
     def test_logging(self):
@@ -8,8 +8,13 @@ class TestLogging(unittest.TestCase):
         Test logging of packets and anomalies.
         """
         log_file = "tests/logs/system.log"
+
+        # Attempt to clean the log file before testing
         if os.path.exists(log_file):
-            os.remove(log_file)  # Clean log file before testing
+            try:
+                os.remove(log_file)
+            except PermissionError as e:
+                self.fail(f"PermissionError: Unable to remove log file: {e}")
 
         print("Testing packet logging...")
         log_packet("192.168.1.100", "10.0.0.1", 1500)
