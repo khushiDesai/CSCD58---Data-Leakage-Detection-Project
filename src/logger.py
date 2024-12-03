@@ -1,6 +1,8 @@
 import logging
 import os
 
+project_root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
 def ensure_log_directory():
     """
     Ensures the 'logs' directory exists. Creates it if it doesn't.
@@ -33,7 +35,7 @@ ensure_log_directory()
 
 # Configure logging settings
 logging.basicConfig(
-    filename=os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", "logs","system.log"),
+    filename=os.path.join(project_root, "logs", "system.log"),
     filemode='a', #append file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
