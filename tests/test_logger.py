@@ -6,7 +6,10 @@ def ensure_log_file(log_file):
     """
     Ensures the log directory and file exist.
     """
-    log_dir = os.path.dirname(log_file)
+    src_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src")
+    log_dir = os.path.join(src_dir, "logs")
+    log_file = os.path.join(log_dir, "system.log")
+    log_file = os.path.abspath(log_file)
     try:
         # Create the directory if it does not exist
         if not os.path.exists(log_dir):
