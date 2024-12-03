@@ -52,6 +52,7 @@ class TestLogging(unittest.TestCase):
 
         # Check the log file for entries
         try:
+            print(log_file)
             with open(log_file, "r") as f:
                 logs = f.read()
                 print("Log file contents:")
