@@ -11,7 +11,7 @@ def ensure_log_directory():
     log_file = os.path.join(log_dir, "system.log")
     log_file = os.path.abspath(log_file)
     # Check if the log directory exists, and create it if not
-    if not os.path.exists(log_dir):
+    if not os.path.exists(log_file):
         try:
             print(f"Created log file: {log_file}")
             with open(log_file, "w") as f:
@@ -21,7 +21,7 @@ def ensure_log_directory():
             # The directory was created by another process
             pass
     else:
-        print(f"Log directory already exists: {log_dir}")
+        print(f"Log directory file already exists: {log_dir}")
 
 # Configure logging settings
 logging.basicConfig(
@@ -32,7 +32,6 @@ logging.basicConfig(
 )
 
 def log_packet(src, dst, size):
-    print("logging")
     """
     Logs details of a captured packet.
     - src: Source IP address
