@@ -6,7 +6,7 @@ def ensure_log_directory():
     Ensures the 'logs' directory exists. Creates it if it doesn't.
     """
     
-    log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src", "logs")
+    log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
 
 
     # Check if the log directory exists, and create it if not
@@ -20,7 +20,7 @@ def ensure_log_directory():
         print(f"Log directory file already exists: {log_dir}")
 
 def check_file_exit():
-    log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)),"src","logs","system.log")
+    log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs","system.log")
     if not os.path.exists(log_file):
         try: 
             print(f"Creating log file: {log_file}")

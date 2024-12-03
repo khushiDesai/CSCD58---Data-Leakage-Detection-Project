@@ -6,8 +6,7 @@ def ensure_log_file(log_file):
     """
     Ensures the log directory and file exist.
     """
-    src_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src")
-    log_dir = os.path.join(src_dir, "logs")
+    log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
     log_file = os.path.join(log_dir, "system.log")
     log_file = os.path.abspath(log_file)
 
@@ -30,7 +29,7 @@ class TestLogging(unittest.TestCase):
         """
         Test logging of packets and anomalies.
         """
-        log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src", "logs", "system.log")
+        log_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs", "system.log")
         log_file = os.path.abspath(log_file)
         
         # Ensure the log file exists
