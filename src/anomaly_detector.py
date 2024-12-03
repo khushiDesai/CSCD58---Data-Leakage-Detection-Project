@@ -1,5 +1,6 @@
 import json
 import os
+from scapy.all import IP #import IP layer from Scapy
 from alert_system import send_alert  # Function to send alerts for suspicious activity
 from block_ips import block_ip  # Function to block suspicious IP addresses
 from logger import log_anomaly  # Function to log detected anomalies
