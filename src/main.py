@@ -11,8 +11,7 @@ def main():
     """
     ensure_log_directory()
     print("Starting Data Leakage Detection Tool")
-    threading.Thread(target=start_sniffing).start()  # Start packet sniffing
-    threading.Thread(target=detect_anomalies).start()  # Start anomaly detection
-
+    threading.Thread(target=start_sniffing, args=(detect_anomalies,)).start()  # Start packet sniffing
+    
 if __name__ == "__main__":
     main()
