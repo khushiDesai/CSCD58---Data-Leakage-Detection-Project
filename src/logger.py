@@ -46,6 +46,7 @@ def log_packet(src, dst, size):
     - size: Size of the packet in bytes
     """
     check_file_exit()
+    print(f"Packet: {src} -> {dst}, Size: {size}")
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
 
 def log_anomaly(src, dst, size):
