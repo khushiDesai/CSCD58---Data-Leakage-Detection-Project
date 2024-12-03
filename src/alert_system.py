@@ -1,6 +1,8 @@
 import json
 import os
 import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # Resolve the absolute path to the `configs/thresholds.json` file
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'configs/thresholds.json')
