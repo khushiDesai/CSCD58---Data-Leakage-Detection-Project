@@ -16,14 +16,14 @@ ALERT_EMAIL = config['alert_email']  # Email address to which alerts will be sen
 
 def send_alert(ip):
     """
-    Sends an email alert when a suspicious IP is detected.
+    Sends an email alert to all configured recipients when a suspicious IP is detected.
     - ip: Source IP address flagged as suspicious.
     """
     print(f"Sending alert for IP: {ip}")
-    # Email setup
     sender_email = config['sender_email']
     smtp_server = config['smtp_server']
     smtp_port = config['smtp_port']
+    recipients = config['alert_email']  # List of alert emails
 
     # Compose email
     subject = f"Alert: Suspicious IP Detected - {ip}"
@@ -32,14 +32,16 @@ def send_alert(ip):
     # Build the email
     message = MIMEMultipart()
     message['From'] = sender_email
-    message['To'] = ALERT_EMAIL
+    message['To'] = ", ".join(recipients)  # Join multiple emails with commas
     message['Subject'] = subject
     message.attach(MIMEText(body, 'plain'))
 
     try:
-        # Connect to Postfix (local SMTP server)
+        # Connect to SMTP server
         with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()  # Secure the connection
+            server.login(sender_email, config['sender_password'])  # Authenticate
             server.send_message(message)
-        print(f"Alert email sent to {ALERT_EMAIL}")
+        print(f"Alert email sent to {recipients}")
     except Exception as e:
         print(f"Failed to send alert email: {e}")
