@@ -57,3 +57,6 @@ def log_anomaly(src, dst, size):
     """
     check_file_exit()
     logging.warning(f"Anomaly detected: {src} -> {dst}, Size: {size}")
+
+if __name__ == '__main__':
+    log_packet("192.168.1.100", "10.0.0.1", 1500)
