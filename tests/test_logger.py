@@ -10,6 +10,7 @@ def ensure_log_file(log_file):
     log_dir = os.path.join(src_dir, "logs")
     log_file = os.path.join(log_dir, "system.log")
     log_file = os.path.abspath(log_file)
+    
     try:
         # Create the directory if it does not exist
         if not os.path.exists(log_dir):
