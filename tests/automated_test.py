@@ -43,8 +43,9 @@ def setup_network():
 
     try:
         # Add components
-        h1 = net.addHost('h1')
-        h2 = net.addHost('h2')
+        # Use host networking for h1
+        h1 = net.addHost('h1', inNamespace=False)  # Use the host's networking stack
+        h2 = net.addHost('h2')  # h2 remains in the Mininet namespace
         s1 = net.addSwitch('s1')
         c0 = net.addController('c0')
 
@@ -53,7 +54,13 @@ def setup_network():
 
         # Start the network
         net.start()
-        print("DEBUG: Mininet network started.")
+        print("DEBUG: Mininet network started with host networking for h1.")
+
+        # Configure DNS for h2 (optional, since h1 uses host networking)
+        print("DEBUG: Configuring DNS for h2...")
+        h2.cmd("echo 'nameserver 8.8.8.8' > /etc/resolv.conf")
+        h2.cmd("echo 'nameserver 8.8.4.4' >> /etc/resolv.conf")
+        print("DEBUG: DNS configuration applied to h2.")
 
         # Deploy detection tool on h1
         print("DEBUG: Starting detection tool on h1...")
@@ -64,10 +71,6 @@ def setup_network():
         # Simulate traffic from h2
         print("DEBUG: Simulating traffic from h2 to h1...")
         generate_unexpected_packets(src_ip=h2.IP(), dst_ip=h1.IP())
-
-        # Verify traffic output or anomalies (Optional)
-        traffic_output = h2.cmd('python3 traffic_simulation.py')
-        print("DEBUG: Traffic Output:", traffic_output)
 
         # Open CLI for manual inspection (Optional)
         print("DEBUG: Opening Mininet CLI for manual inspection...")
