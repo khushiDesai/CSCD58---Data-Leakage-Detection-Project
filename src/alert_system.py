@@ -1,9 +1,14 @@
 import json
+import os
 import smtplib
 
+# Resolve the absolute path to the `configs/thresholds.json` file
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'configs/thresholds.json')
+
 # Load configuration settings from thresholds.json
-with open('configs/thresholds.json') as f:
+with open(CONFIG_PATH) as f:
     config = json.load(f)
+
 
 ALERT_EMAIL = config['alert_email']  # Email address to which alerts will be sent
 

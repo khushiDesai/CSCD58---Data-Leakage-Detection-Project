@@ -10,8 +10,6 @@ def ensure_log_directory():
 
 ensure_log_directory()
 
-
-
 # Configure logging settings
 logging.basicConfig(
     filename="logs/system.log",
