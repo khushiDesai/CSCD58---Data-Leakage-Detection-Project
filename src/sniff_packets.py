@@ -1,5 +1,5 @@
 from scapy.all import sniff, IP  # Scapy functions for packet sniffing and IP layer handling
-from utils.logger import log_packet  # Function to log captured packets
+from logger import log_packet  # Function to log captured packets
 
 def packet_callback(packet):
     """
