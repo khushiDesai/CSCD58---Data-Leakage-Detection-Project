@@ -3,6 +3,7 @@ from mininet.node import Controller
 from mininet.cli import CLI
 from mininet.link import TCLink
 from scapy.all import IP, UDP, TCP, ICMP, Raw, send
+conf.use_ipv6 = False
 
 def generate_unexpected_packets(src_ip, dst_ip):
     """
