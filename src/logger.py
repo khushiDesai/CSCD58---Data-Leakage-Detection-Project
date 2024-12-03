@@ -15,6 +15,7 @@ logging.basicConfig(
     filename="logs/system.log",
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
+    force=True
 )
 
 def log_packet(src, dst, size):
