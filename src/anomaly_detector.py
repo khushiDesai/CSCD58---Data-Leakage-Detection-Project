@@ -3,7 +3,7 @@ import os
 from scapy.all import IP#import IP layer from Scapy
 
 from alert_system import send_alert  # Function to send alerts for suspicious activity
-from block_ips import block_ip  # Function to block suspicious IP addresses
+from block_ips import block_ip, get_blocked_ips  # Function to block suspicious IP addresses
 from logger import log_anomaly  # Function to log detected anomalies
 
 # Resolve the absolute path to the `configs/thresholds.json` file
@@ -14,8 +14,6 @@ with open(CONFIG_PATH) as f:
     config = json.load(f)
 
 THRESHOLD_SIZE = config['threshold_size']  # Packet size threshold for anomaly detection
-
-blocked_ips = set()
 
 def detect_anomalies(packet):
     """
@@ -30,10 +28,10 @@ def detect_anomalies(packet):
             size = len(packet)  # Packet size in bytes
 
             # Enforce blocking at the iptables level
-            if src in blocked_ips:
+            if src in get_blocked_ips():
                 print(f"Packet from blocked IP {src} dropped.")
                 return  # Drop packet processing
-                
+
             # Check if the packet exceeds the defined size threshold
             if size > THRESHOLD_SIZE:
                 print(f"Anomaly detected: Large packet from {src} -> {dst}, Size: {size}")
