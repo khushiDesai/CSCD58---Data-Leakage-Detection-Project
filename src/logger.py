@@ -2,7 +2,9 @@ import logging
 import os
 import unittest
 
-project_root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+# Resolve the absolute project root directory
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 
 def ensure_log_directory():
     """
@@ -40,7 +42,7 @@ def log_packet(src, dst, size):
     """
     Logs details of a captured packet.
     """
-    print(get_log_file_path() +"ss")
+    print(get_log_file_path())
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
     flush_logs()
 
