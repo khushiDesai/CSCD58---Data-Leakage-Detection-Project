@@ -43,7 +43,7 @@ def setup_network():
 
     try:
         # Add components
-        h1 = net.addHost('h1', inNamespace=False)  # Use host networking
+        h1 = net.addHost('h1')
         h2 = net.addHost('h2')
         s1 = net.addSwitch('s1')
         c0 = net.addController('c0')
@@ -53,20 +53,7 @@ def setup_network():
 
         # Start the network
         net.start()
-        print("DEBUG: Mininet network started with host networking for h1.")
-
-        # Configure DNS for h2
-        print("DEBUG: Configuring DNS for h2...")
-        h2.cmd("echo 'nameserver 8.8.8.8' > /etc/resolv.conf")
-        h2.cmd("echo 'nameserver 8.8.4.4' >> /etc/resolv.conf")
-        print("DEBUG: DNS configuration applied to h2.")
-
-        # Test DNS and SMTP reachability from h1
-        print("DEBUG: Verifying DNS and SMTP connectivity from h1...")
-        dns_test = h1.cmd("ping -c 3 smtp.gmail.com")
-        print(f"DEBUG: DNS Test Output:\n{dns_test}")
-        smtp_test = h1.cmd("telnet smtp.gmail.com 587")
-        print(f"DEBUG: SMTP Test Output:\n{smtp_test}")
+        print("DEBUG: Mininet network started.")
 
         # Deploy detection tool on h1
         print("DEBUG: Starting detection tool on h1...")
@@ -78,7 +65,11 @@ def setup_network():
         print("DEBUG: Simulating traffic from h2 to h1...")
         generate_unexpected_packets(src_ip=h2.IP(), dst_ip=h1.IP())
 
-        # Open CLI for manual inspection
+        # Verify traffic output or anomalies (Optional)
+        traffic_output = h2.cmd('python3 traffic_simulation.py')
+        print("DEBUG: Traffic Output:", traffic_output)
+
+        # Open CLI for manual inspection (Optional)
         print("DEBUG: Opening Mininet CLI for manual inspection...")
         CLI(net)
 
