@@ -25,7 +25,8 @@ class TestIntegration(unittest.TestCase):
         blocked_ip = packet[IP].src
         try:
             result = subprocess.run(
-                ["sudo", "iptables", "-L", "|", "grep", blocked_ip],
+                "sudo iptables -L | grep 192.168.1.100",
+                shell=True,  # Use shell to interpret the pipe
                 capture_output=True,
                 text=True,
                 check=True,
