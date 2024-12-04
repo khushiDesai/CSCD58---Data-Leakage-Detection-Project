@@ -99,8 +99,12 @@ cd CSCD58---Data-Leakage-Detection-Project
 
 6. **Test Components Individually**: Run tests for specific modules:
 ```bash
-    python3 -m unittest tests/test_alert_system.py
-    python3 -m unittest discover -s tests -p "*.py"
+   python3 -m unittest tests/test_alert_system.py
+   python3 -m unittest tests/test_alert_system.py
+   python3 -m unittest tests/test_anomaly_detector.py
+   python3 -m unittest tests/test_block_ips.py
+   python3 -m unittest tests/test_integration.py
+   python3 -m unittest src/logger.py
 ```
 
 ---
@@ -137,9 +141,8 @@ CSCD58---Data-Leakage-Detection-Project
 │   │   logger.py                   # Logging system
 │   │   main.py                     # Main script to run the tool
 │   │   sniff_packets.py            # Packet sniffing logic
-│   └───logs/
-│   │   │   system.log              # Log file for captured packets and anomalies
-│   
+└───logs/
+│   │   system.log                  # Log file for captured packets and anomalies
 └───tests
 │   │   test_alert_system.py        # Test for alert system
 │   │   test_anomaly_dectector.py   # Test for anomaly dectection
@@ -156,7 +159,6 @@ CSCD58---Data-Leakage-Detection-Project
     - Simulated scenarios in Mininet demonstrated realistic behaviors, validating the tool’s utility.
 - **Performance Metrics**
     - Accuracy: Low false positives/negatives under tested scenarios.
-    - Efficiency: Real-time detection with minimal latency.
 - **Challenges**
     - Ensuring compatibility across different network environments.
     - Managing the balance between detection sensitivity and false positives.
