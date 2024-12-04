@@ -1,0 +1,15 @@
+{
+    "threshold_size": 1000,
+    "alert_email": [
+        "khushimdesai@gmail.com",
+        "vicky20020103@gmail.com"
+    ],
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "sender_email": "data.alerts.tool@gmail.com",
+    "sender_password": "rppa pexa tilz ijni",
+    "response_actions": [
+        "block_ip",
+        "send_alert"
+    ]
+}

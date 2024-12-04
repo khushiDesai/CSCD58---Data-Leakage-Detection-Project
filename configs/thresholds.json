@@ -1,8 +1,0 @@
-{
-    "threshold_size": 1000,
-    "alert_email": "admin@example.com",
-    "response_actions": [
-        "block_ip",
-        "send_alert"
-    ]
-}

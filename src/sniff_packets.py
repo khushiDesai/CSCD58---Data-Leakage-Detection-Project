@@ -1,12 +1,14 @@
 from scapy.all import sniff, IP  # Scapy functions for packet sniffing and IP layer handling
-from utils.logger import log_packet  # Function to log captured packets
+from logger import log_packet  # Function to log captured packets
 
-def packet_callback(packet):
+def packet_callback(packet, anomaly_callback):
     """
     Callback function to process each captured packet.
     - Logs the packet details if it contains an IP layer.
     - Skips non-IP packets.
     """
+    print(f"Captured Packet: {packet.summary()}")
+
     try:
         # Check if the packet contains an IP layer
         if IP in packet:
@@ -17,18 +19,21 @@ def packet_callback(packet):
             
             # Log the captured packet
             log_packet(src, dst, size)
+
+            #pass packet to anomaly detection callback
+            anomaly_callback(packet)
         else:
             # Skip packets without an IP layer
             print("Non-IP packet captured. Skipping...")
     except Exception as e:
         print(f"Error processing packet: {e}")
 
-def start_sniffing():
+def start_sniffing(anomaly_callback):
     """
     Starts packet sniffing using Scapy.
     Captures only IP packets and processes them via packet_callback.
     """
     try:
-        sniff(prn=packet_callback, filter="ip", store=False)  # Sniff IP packets only
+        sniff(prn=lambda pkt: packet_callback(pkt, anomaly_callback), filter="ip", store=False)  # Sniff IP packets only
     except Exception as e:
         print(f"Error starting packet sniffing: {e}")
