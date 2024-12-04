@@ -136,7 +136,7 @@ CSCD58---Data-Leakage-Detection-Project
 │   │   block_ips.py                # IP blocking functionality
 │   │   logger.py                   # Logging system
 │   │   main.py                     # Main script to run the tool
-│   │   sinff_packets.py            # Packet sniffing logic
+│   │   sniff_packets.py            # Packet sniffing logic
 │   └───logs/
 │   │   │   system.log              # Log file for captured packets and anomalies
 │   
@@ -144,7 +144,6 @@ CSCD58---Data-Leakage-Detection-Project
 │   │   test_alert_system.py        # Test for alert system
 │   │   test_anomaly_dectector.py   # Test for anomaly dectection
 │   │   test_block_ips.py           # Test for IP blocking
-│   │   test_logger.py              # Test for logging
 │   │   traffic_simulation.py       # Traffic generation script
 │   │   automated_test.py           # Automated testing scripts
 
