@@ -28,13 +28,6 @@ def send_alert(ip):
     recipients = config.get('alert_email', [])
     sender_password = config.get('sender_password')
 
-    # Debugging output
-    print(f"DEBUG: Sender Email: {sender_email}")
-    print(f"DEBUG: SMTP Server: {smtp_server}")
-    print(f"DEBUG: SMTP Port: {smtp_port}")
-    print(f"DEBUG: Recipients: {recipients}")
-    print(f"DEBUG: Sender Password Provided: {'Yes' if sender_password else 'No'}")
-
     # Compose email
     subject = f"Alert: Suspicious IP Detected and Blocked - {ip}"
     body = (
@@ -55,7 +48,6 @@ def send_alert(ip):
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.set_debuglevel(1)  # Enable detailed SMTP debugging
             server.starttls()
-            print("DEBUG: Starting TLS...")
             server.login(sender_email, sender_password)
             print("DEBUG: Login successful.")
             server.send_message(message)
