@@ -35,13 +35,14 @@ The **Data Leakage Detection Tool** is a simplified yet practical system designe
 - Integrated **logging systems** to track and record network anomalies.
 - Developed the **real-time network monitoring scripts** using Scapy and Wireshark.
 - Contributed to the **testing phase** by simulating data leakage scenarios in Mininet.
+- Contributed in presenting the video demonstration of the tool.
 - Authored sections of the documentation, including implementation details and analysis.
 
 ### **Vicky Chen** (1007121838)
 - Configured the **alert system** to send notifications for detected anomalies.
 - Designed and implemented the **automated IP blocking mechanism** using `iptables`.
 - Assisted in testing and analyzing false positives/negatives from anomaly detection.
-- Developed and presented the video demonstration of the tool.
+- Contributed in presenting the video demonstration of the tool.
 - Contributed to the **report writing**, focusing on goals, results, and concluding remarks.
 
 ---
