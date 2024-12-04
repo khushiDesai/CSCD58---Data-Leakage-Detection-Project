@@ -59,10 +59,6 @@ class TestLogging(unittest.TestCase):
         """
         log_file = get_log_file_path()
 
-        # Ensure the log file exists
-        if os.path.exists(log_file):
-            os.remove(log_file)
-
         print("Testing packet logging...")
         log_packet("192.168.1.100", "10.0.0.1", 1500)
         log_anomaly("192.168.1.100", "10.0.0.1", 2000)
