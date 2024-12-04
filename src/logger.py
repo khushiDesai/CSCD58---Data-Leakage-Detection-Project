@@ -40,7 +40,7 @@ def log_packet(src, dst, size):
     """
     Logs details of a captured packet.
     """
-    print(project_root +"ss")
+    print(get_log_file_path() +"ss")
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
     flush_logs()
 
