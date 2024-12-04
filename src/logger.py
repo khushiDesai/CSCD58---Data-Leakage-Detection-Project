@@ -12,22 +12,19 @@ def ensure_log_directory():
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
 
-def check_file_exit():
+def get_log_file_path():
     """
-    Ensures the log file exists.
+    Returns the absolute path of the log file.
     """
-    log_file = os.path.join(project_root, "logs", "system.log")
-    if not os.path.exists(log_file):
-        with open(log_file, "w") as f:
-            pass
+    return os.path.join(project_root, "logs", "system.log")
 
 ensure_log_directory()
 
 # Configure logging settings
-log_file_path = os.path.join(project_root, "logs", "system.log")
+log_file_path = get_log_file_path()
 logging.basicConfig(
     filename=log_file_path,
-    filemode='a',  # Append to file
+    filemode='w',  # Overwrite file for testing
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
@@ -43,7 +40,6 @@ def log_packet(src, dst, size):
     """
     Logs details of a captured packet.
     """
-    check_file_exit()
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
     flush_logs()
 
@@ -51,23 +47,18 @@ def log_anomaly(src, dst, size):
     """
     Logs details of a detected anomaly.
     """
-    check_file_exit()
     logging.warning(f"Anomaly detected: {src} -> {dst}, Size: {size}")
     flush_logs()
 
-# Integrated tests
+# Integrated test
 class TestLogging(unittest.TestCase):
     def test_logging(self):
         """
         Test logging of packets and anomalies.
         """
-        log_file = os.path.join(project_root, "logs", "system.log")
+        log_file = get_log_file_path()
 
         # Ensure the log file exists
-        if not os.path.exists(log_file):
-            check_file_exit()
-
-        # Clean the log file before testing
         if os.path.exists(log_file):
             os.remove(log_file)
 
