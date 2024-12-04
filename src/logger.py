@@ -9,52 +9,51 @@ def ensure_log_directory():
     Ensures the 'logs' directory exists. Creates it if it doesn't.
     """
     log_dir = os.path.join(project_root, "logs")
-    # Check if the log directory exists, and create it if not
     if not os.path.exists(log_dir):
-        try:
-            os.makedirs(log_dir)
-        except FileExistsError:
-            pass  # The directory was created by another process
+        os.makedirs(log_dir)
 
 def check_file_exit():
+    """
+    Ensures the log file exists.
+    """
     log_file = os.path.join(project_root, "logs", "system.log")
     if not os.path.exists(log_file):
-        try:
-            print(f"Creating log file: {log_file}")
-            with open(log_file, "w") as f:
-                pass
-        except Exception as e:
-            raise RuntimeError(f"Error ensuring log file '{log_file}': {e}")
+        with open(log_file, "w") as f:
+            pass
 
 ensure_log_directory()
 
 # Configure logging settings
+log_file_path = os.path.join(project_root, "logs", "system.log")
 logging.basicConfig(
-    filename=os.path.join(project_root, "logs", "system.log"),
+    filename=log_file_path,
     filemode='a',  # Append to file
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+def flush_logs():
+    """
+    Flush the logging handlers to ensure logs are written to the file immediately.
+    """
+    for handler in logging.getLogger().handlers:
+        handler.flush()
+
 def log_packet(src, dst, size):
     """
     Logs details of a captured packet.
-    - src: Source IP address
-    - dst: Destination IP address
-    - size: Size of the packet in bytes
     """
     check_file_exit()
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
+    flush_logs()
 
 def log_anomaly(src, dst, size):
     """
     Logs details of a detected anomaly.
-    - src: Source IP address
-    - dst: Destination IP address
-    - size: Size of the packet in bytes
     """
     check_file_exit()
     logging.warning(f"Anomaly detected: {src} -> {dst}, Size: {size}")
+    flush_logs()
 
 # Integrated tests
 class TestLogging(unittest.TestCase):
@@ -63,17 +62,14 @@ class TestLogging(unittest.TestCase):
         Test logging of packets and anomalies.
         """
         log_file = os.path.join(project_root, "logs", "system.log")
-        
+
         # Ensure the log file exists
         if not os.path.exists(log_file):
             check_file_exit()
 
         # Clean the log file before testing
         if os.path.exists(log_file):
-            try:
-                os.remove(log_file)
-            except PermissionError as e:
-                self.fail(f"PermissionError: Unable to remove log file: {e}")
+            os.remove(log_file)
 
         print("Testing packet logging...")
         log_packet("192.168.1.100", "10.0.0.1", 1500)
