@@ -44,6 +44,7 @@ def log_packet(src, dst, size):
     - size: Size of the packet in bytes
     """
     check_file_exit()
+    print(project_root +"ss")
     logging.info(f"Packet: {src} -> {dst}, Size: {size}")
 
 def log_anomaly(src, dst, size):
@@ -81,6 +82,7 @@ class TestLogging(unittest.TestCase):
 
         # Check the log file for entries
         try:
+            print(log_file)
             with open(log_file, "r") as f:
                 logs = f.read()
                 print("Log file contents:")
