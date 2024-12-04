@@ -27,7 +27,7 @@ class TestBlockIP(unittest.TestCase):
         try:
             block_ip(test_ip)
             result = subprocess.run(
-                ["sudo", "iptables", "-L"], capture_output=True, text=True
+                ["sudo", "iptables", "-L"], capture_output=True, text=True, check=True
             )
             self.assertIn(test_ip, result.stdout, "test_block_ip: IP successfully blocked.")
         except Exception as e:

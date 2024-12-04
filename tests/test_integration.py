@@ -5,6 +5,7 @@ from scapy.all import IP, TCP
 from src.anomaly_detector import detect_anomalies
 from src.logger import log_anomaly
 from src.block_ips import block_ip
+import subprocess
 
 class TestIntegration(unittest.TestCase):
     def test_full_workflow(self):
@@ -22,8 +23,16 @@ class TestIntegration(unittest.TestCase):
 
         # Check if the IP was blocked
         blocked_ip = packet[IP].src
-        result = os.popen(f"sudo iptables -L | grep {blocked_ip}").read()
-        self.assertIn(blocked_ip, result, "Full workflow executed successfully.")
+        try:
+            result = subprocess.run(
+                ["sudo", "iptables", "-L", "|", "grep", blocked_ip],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            self.assertIn(blocked_ip, result.stdout, "Full workflow executed successfully.")
+        except subprocess.CalledProcessError as e:
+            self.fail(f"Error checking blocked IP: {e}")
 
 if __name__ == "__main__":
     unittest.main()
